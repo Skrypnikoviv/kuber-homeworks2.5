@@ -124,30 +124,19 @@ helm install app2-v1 ./myapp --namespace app2 \
 helm list -A
 ```
 
+![image](https://github.com/user-attachments/assets/fb2ac6c1-fb95-4395-ab31-fdff103cbcc7)
+
 6. Проверим поды в разных неймспейсах:
 ```bash
 kubectl get pods -n app1
 kubectl get pods -n app2
 ```
 
-7. Пример вывода (может отличаться в вашем случае):
-```
-NAMESPACE  NAME                     READY  STATUS   RESTARTS  AGE
-app1       app1-v1-frontend-xxxxx   1/1    Running  0         2m
-app1       app1-v1-backend-xxxxx    1/1    Running  0         2m
-app1       app1-v2-frontend-xxxxx   1/1    Running  0         1m
-app1       app1-v2-frontend-xxxxx   1/1    Running  0         1m
-app1       app1-v2-backend-xxxxx    1/1    Running  0         1m
-app2       app2-v1-frontend-xxxxx   1/1    Running  0         30s
-app2       app2-v1-backend-xxxxx    1/1    Running  0         30s
-app2       app2-v1-backend-xxxxx    1/1    Running  0         30s
-app2       app2-v1-backend-xxxxx    1/1    Running  0         30s
-```
+7. Пример вывода:
 
-8. Для демонстрации различий можно проверить образы:
-```bash
-kubectl get deployments -n app1 -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.template.spec.containers[0].image}{"\n"}{end}'
-kubectl get deployments -n app2 -o jsonpath='{range .items[*]}{.metadata.name}{"\t"}{.spec.template.spec.containers[0].image}{"\n"}{end}'
-```
+![image](https://github.com/user-attachments/assets/de7d9e89-cf77-4c24-9e5b-4eeb08294d47)
+
+![image](https://github.com/user-attachments/assets/6bdf4f9f-8b21-4e5a-8248-e75ebed88d5d)
+
 
 Таким образом, мы успешно развернули три разных версии приложения в двух неймспейсах с помощью Helm, продемонстрировав гибкость управления версиями и конфигурациями приложений в Kubernetes.
